@@ -10,8 +10,8 @@
     "url": "https://github.com/scyclow/es6-skel"
   },
   "scripts": {
-    "clean": "rm ./build/*",
-    "watch": "rm ./build/* && webpack -watch",
+    "clean": "rm -rf ./build/*",
+    "watch": "rm ./build/* && webpack && webpack -watch",
     "unit": "karma start"
   },
   "dependencies": {
