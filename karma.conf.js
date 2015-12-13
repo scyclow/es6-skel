@@ -8,7 +8,7 @@ module.exports = function(config) {
 
     files: [
       { pattern: 'test/specs.webpack.js', watched: true },
-      // { pattern: 'src/**/*.js', watched: true },
+      { pattern: 'src/scripts/**/*.js', watched: true },
       { pattern: './node_modules/babel-core/browser-polyfill.js', watched: false }
     ],
 

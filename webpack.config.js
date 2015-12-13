@@ -3,10 +3,10 @@ var ignoredFolders = /node_modules/;
 
 module.exports = {
   context: __dirname + '/src',
-  entry: './index.js',
+  entry: './scripts/index.js',
 
   output: {
-    filename: 'app.js',
+    filename: 'index.js',
     path: __dirname + '/build'
   },
 
@@ -29,7 +29,14 @@ module.exports = {
       {
         test: compileFiles,
         exclude: ignoredFolders,
-        loaders: ['babel-loader']
+        loader: 'babel',
+          query: {
+            cacheDirectory: true,
+            presets: ['es2015', 'react', 'stage-1']
+        }
+      }, {
+        test:/\.scss$/,
+        loaders: ["style", "css", "sass"]
       }
     ]
   }
