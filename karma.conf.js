@@ -9,7 +9,7 @@ module.exports = function(config) {
     files: [
       { pattern: 'test/specs.webpack.js', watched: true },
       { pattern: 'src/scripts/**/*.js', watched: true },
-      { pattern: './node_modules/babel-core/browser-polyfill.js', watched: false }
+      { pattern: './node_modules/babel-polyfill/browser.js', watched: false }
     ],
 
     exclude: [],
@@ -25,8 +25,12 @@ module.exports = function(config) {
         loaders: [
           {
             test: /\.js$/,
-            exclude: /(bower_components|node_modules)/,
-            loader: 'babel-loader'
+            // exclude: /(bower_components|node_modules)/,
+            loader: 'babel-loader',
+              query: {
+                cacheDirectory: true,
+                presets: ['es2015', 'react', 'stage-1']
+            }
           }
         ]
       }

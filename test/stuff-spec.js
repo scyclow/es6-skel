@@ -1,4 +1,4 @@
-import * as blah from '../src/scripts/index';
+import * as blah from '../src/scripts/utils/crap';
 
 describe('Is this shit working?', () => {
   it('If this works, then probably', () => {
@@ -10,11 +10,11 @@ describe('Is this shit working?', () => {
     expect(x.next().value).toBe(expectedOutput);
   });
 
-  it('still works', () => {
-    let x = (async function() {
-      return 5
-    })();
+  // it('still works', () => {
+  //   let x = (async function() {
+  //     return 5
+  //   })();
 
-    expect(x).toBe(5)
-  });
+  //   expect(x).toBe(5)
+  // });
 });
