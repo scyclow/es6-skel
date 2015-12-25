@@ -1,0 +1,31 @@
+table {
+  border-collapse: collapse;
+  font-feature-settings: "kern", "liga", "tnum";
+  margin: $spacing-small 0;
+  table-layout: fixed;
+  width: 100%;
+}
+
+th, td {
+  padding: $spacing-small;
+
+  &:not(:first-child) {
+    padding-left: 0;
+  }
+}
+
+th {
+  border-bottom: 1px solid shade($border-color-base, 25%);
+  font-weight: $font-weight-normal;
+  text-align: left;
+}
+
+td {
+  border-bottom: $border-base;
+}
+
+tr,
+td,
+th {
+  vertical-align: middle;
+}

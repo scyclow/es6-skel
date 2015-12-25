@@ -1,0 +1,57 @@
+// TODO - actually download typefaces
+@import url(https://fonts.googleapis.com/css?family=Open+Sans|Oxygen);
+
+// Typography
+$font-family-base: 'Open Sans', sans-serif;
+$font-family-logo: 'Oxygen', sans-serif;
+$font-family-heading: $font-family-base;
+
+// Font Sizes
+$font-size-base: 0.9em;
+$font-size-title: 1.8em;
+
+// Line height
+$line-height-base: 1.5;
+$line-height-heading: 1.2;
+
+// Font weight
+$font-weight-light: 200;
+$font-weight-normal: 400;
+$font-weight-heavy: 600;
+
+// Other Sizes
+$border-radius-base: 2px;
+$spacing-base: $line-height-base * 1em;
+$spacing-small: $spacing-base / 2;
+$z-index-base: 0;
+
+// Colors
+$blue: #477dca;
+$dark-gray: #333;
+$medium-gray: #AAAAAA;
+$light-gray: #EEEEEE;
+$black: #000000;
+$white: #FFFFFF;
+$off-white: #FAFAFA;
+$primary: #354A7D;
+
+// Font Colors
+$font-color-base: $dark-gray;
+$font-color-light: $white;
+$action-color: $blue;
+
+// Border
+$border-color-base: $medium-gray;
+$border-base: 1px solid $border-color-base;
+
+// Background Colors
+$background-color-base: $white;
+$background-color-secondary: tint($border-color-base, 75%);
+
+// Forms
+$form-box-shadow: inset 0 1px 3px rgba(#000, 0.06);
+$form-box-shadow-focus: $form-box-shadow, 0 0 5px adjust-color($action-color, $lightness: -5%, $alpha: -0.3);
+
+// Animations
+$base-duration: 150ms;
+$base-timing: ease;
