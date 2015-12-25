@@ -19,7 +19,7 @@ render(
   // <Provider store={store}>
   //   <App />
   // </Provider>,
-  <App number="number"/>,
+  <App number="fuck ye"/>,
 
   document.getElementById('app')
 );

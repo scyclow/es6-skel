@@ -1,5 +1,9 @@
 var path = require('path');
 var webpack = require('webpack');
+var sassPaths = require("node-neat").includePaths
+  .map(function(sassPath) { return 'includePaths[]=' + sassPath; })
+  .join("&");
+
 var compileFiles = /\.js/;
 var ignoredFolders = /node_modules/;
 
@@ -34,9 +38,10 @@ module.exports = {
         exclude: ignoredFolders,
         loaders: ['babel'],
         include: path.join(__dirname, 'src')
-      }, {
-        test:/\.scss$/,
-        loaders: ["style", "css", "sass"]
+      },
+      {
+        test: /\.scss$/,
+        loader: 'style!css!sass?' + sassPaths
       }
     ]
   }
