@@ -1,25 +1,26 @@
 import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
-// import { Provider } from 'react-redux';
 
+import { createStore } from 'redux';
+import rootReducer from './reducers/rootReducer';
+import { Provider } from 'react-redux';
+
+import App from './containers/App';
 require('../styles/application.scss');
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className="thing">
-        {this.props.number}
-      </div>
-    );
-  }
-}
+const store = createStore(rootReducer);
+
+/////////////////////////////////////////////////////////
+////////// FOR TESTING PURPOSES ONLY ///////////////////
+/**/ import { count } from './actions' ////////////////
+/**/ window.count = (n) => store.dispatch(count(n)) //
+/////////////////////////////////////////////////////
 
 render(
-  // <Provider store={store}>
-  //   <App />
-  // </Provider>,
-  <App number="fuck ye"/>,
+  <Provider store={store}>
+    <App />
+  </Provider>,
 
   document.getElementById('app')
 );

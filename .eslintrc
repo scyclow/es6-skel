@@ -26,6 +26,11 @@
     "indent": 0,
     "key-spacing": 0,
     "no-nested-ternary": 0,
+    "semi": 1,
+    "no-debugger": 1,
+    "no-multiple-empty-lines": 1,
+    "no-unused-vars": 1,
+    "spaced-comment": 1
   },
   "globals": {
     "React": false
