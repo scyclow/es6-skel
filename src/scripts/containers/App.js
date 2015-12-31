@@ -3,7 +3,6 @@ import Thing from '../components/Thing';
 
 import { connect } from 'react-redux';
 
-
 class App extends React.Component {
   render() {
     return (
@@ -13,7 +12,7 @@ class App extends React.Component {
 }
 
 const select = (state) => {
-  return { count: state.bleh.count }
+  return { count: state.bleh.count };
 };
 
 export default connect(select)(App);
