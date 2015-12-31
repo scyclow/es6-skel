@@ -7,17 +7,20 @@ var sassPaths = require("node-neat").includePaths
 var compileFiles = /\.js/;
 var ignoredFolders = /node_modules/;
 
+var port = 3333;
+
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'inline-source-map',
+  port: port,
   entry: [
     'eventsource-polyfill', // necessary for hot reloading with IE
-    'webpack-hot-middleware/client',
+    'webpack-hot-middleware/client?path=http://localhost:3333/__webpack_hmr',
     './src/scripts/index'
   ],
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, 'dist'),
-    publicPath: '/static/'
+    publicPath: 'http://localhost:'+ port + '/static/'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
