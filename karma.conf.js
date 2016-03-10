@@ -1,5 +1,8 @@
 // Karma configuration
 
+var webpackConfig = require('./webpack.config.js');
+webpackConfig.entry = {};
+
 module.exports = function(config) {
   config.set({
     basePath: '',
@@ -7,30 +10,18 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
 
     files: [
-      { pattern: 'test/specs.webpack.js', watched: true },
+      { pattern: './specs.webpack.js', watched: true },
       // { pattern: 'src/**/*.js', watched: true },
-      { pattern: './node_modules/babel-core/browser-polyfill.js', watched: false }
+      { pattern: './node_modules/phantomjs-polyfill/bind-polyfill.js', watched: false }
     ],
 
     exclude: [],
 
     preprocessors: {
-      'test/specs.webpack.js': ['webpack', 'sourcemap']
+      './specs.webpack.js': ['webpack', 'sourcemap']
     },
 
-    webpack: {
-      devtool: 'inline-source-map',
-      watch: true,
-      module: {
-        loaders: [
-          {
-            test: /\.js$/,
-            exclude: /(bower_components|node_modules)/,
-            loader: 'babel-loader'
-          }
-        ]
-      }
-    },
+    webpack: webpackConfig,
 
     webpackMiddleware: {
       noInfo: true
@@ -44,7 +35,7 @@ module.exports = function(config) {
       'karma-sourcemap-loader'
     ],
 
-    reporters: ['progress'],
+    reporters: ['progress', 'dots'],
 
     port: 9876,
 

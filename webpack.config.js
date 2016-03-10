@@ -1,4 +1,4 @@
-var compileFiles = /\.js/;
+var compileFiles = /\.js$/;
 var ignoredFolders = /node_modules/;
 
 module.exports = {
@@ -29,7 +29,7 @@ module.exports = {
       {
         test: compileFiles,
         exclude: ignoredFolders,
-        loaders: ['babel-loader']
+        loaders: ['babel']
       }
     ]
   }
