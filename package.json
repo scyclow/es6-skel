@@ -10,8 +10,8 @@
     "url": "https://github.com/scyclow/es6-skel"
   },
   "scripts": {
-    "clean": "rimraf dist",
-    "watch": "npm run clean && webpack && webpack -watch",
+    "clean": "rimraf build",
+    "watch": "npm run clean && webpack && webpack --watch",
     "unit": "karma start"
   },
   "dependencies": {
