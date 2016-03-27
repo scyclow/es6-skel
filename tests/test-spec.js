@@ -1,4 +1,4 @@
-import * as blah from '../index';
+import * as blah from '../src/test';
 
 describe('Is this shit working?', () => {
   it('If this works, then probably', () => {
