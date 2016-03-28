@@ -1,18 +1,20 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { doSomething } from '../actions';
 
+@connect(state => state)
 class App extends React.Component {
-  state = { bleh: 0 }
-
   click() {
-    console.log('clicked')
-    let bleh = this.state.bleh + 20;
-    this.setState({ bleh })
+    const { dispatch, something } = this.props;
+    dispatch(doSomething(something.something + 'a'))
   }
 
   render() {
+    const { something } = this.props;
+
     return (
       <div onClick={this.click.bind(this)}>
-        {this.props.thing} + { this.state.bleh }
+        + { something.something }
       </div>
     );
   }

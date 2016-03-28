@@ -8,8 +8,9 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-// import { Provider } from 'react-redux';
+import { Provider } from 'react-redux';
 
+import configureStore from '../store';
 import App from '../containers/App';
 
 const app = new Express();
@@ -28,12 +29,20 @@ app.use(renderResponse);
 
 function renderResponse(req, res) {
   console.log(`Received request to ${req.url}`);
-  const html = renderToString(<App thing="server" />);
-  res.send(renderHTML(html));
+
+  const initialState = { something: { something: 'server nonsense' } };
+  const store = configureStore(initialState);
+
+  const html = renderToString(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+  res.send(renderHTML(html, initialState));
   res.sendFile('/build/app.js', { root: path.join(__dirname, '../..') });
 }
 
-function renderHTML(html) {
+function renderHTML(html, initialState) {
   return `
     <doctype! html>
     <html>
@@ -55,6 +64,9 @@ function renderHTML(html) {
 
     <body>
       <div id="app">${html}</div>
+      <script>
+        window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
+      </script>
       <script src="/app.js"></script>
     </body>
 
