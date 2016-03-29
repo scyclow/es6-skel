@@ -1,5 +1,6 @@
 import path from 'path';
 import Express from 'express';
+import PrettyError from 'pretty-error';
 
 import webpack from 'webpack';
 import webpackConfig from '../../webpack.config';
@@ -13,13 +14,13 @@ import { Provider } from 'react-redux';
 import configureStore from '../store';
 import App from '../containers/App';
 
+const pe = new PrettyError();
+pe.start();
+
 const app = new Express();
 const port = 3333;
 
 if (process.env.NODE_ENV === 'development') {
-  console.log('>>>>>>>>>>>>>>>>>>>>>')
-  console.log('>>>>>>>>>>>>>>>>>>>>>')
-  console.log('>>>>>>>>>>>>>>>>>>>>>')
   const compiler = webpack(webpackConfig);
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath }));
   app.use(webpackHotMiddleware(compiler));
