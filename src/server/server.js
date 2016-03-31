@@ -22,7 +22,14 @@ const port = 3333;
 
 if (process.env.NODE_ENV === 'development') {
   const compiler = webpack(webpackConfig);
-  app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath }));
+  app.use(webpackDevMiddleware(compiler, {
+    contentBase: 'http://localhost:' + port,
+    hot: true,
+    inline: true,
+    lazy: false,
+    headers: { 'Access-Control-Allow-Origin': '*' },
+    stats: { colors: true }
+  }));
   app.use(webpackHotMiddleware(compiler));
 }
 
@@ -40,7 +47,12 @@ function renderResponse(req, res) {
     </Provider>
   );
   res.send(renderHTML(html, initialState));
+
+  // FIXME -- why do I need to explicitly send it off here?
+  // Leading to the following error:
+  // Error: Can't set headers after they are sent.
   res.sendFile('/build/app.js', { root: path.join(__dirname, '../..') });
+  res.sendFile('/build/main.css', { root: path.join(__dirname, '../..') });
 }
 
 function renderHTML(html, initialState) {
@@ -61,6 +73,7 @@ function renderHTML(html, initialState) {
         name="keywords"
         content="god, sex, power, the, love, wealth, happiness"
       >
+      <link rel="stylesheet" href="/main.css">
     </head>
 
     <body>

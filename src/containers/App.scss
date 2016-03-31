@@ -1,0 +1,10 @@
+.thing {
+  & .bleh {
+    color: red;
+  }
+  background-color: blue;
+}
+
+.bleh {
+  color: green;
+}
