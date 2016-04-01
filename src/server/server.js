@@ -10,6 +10,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
+import { Presets, StyleSheet, LookRoot, Plugins } from 'react-look';
 
 import configureStore from '../store';
 import App from '../containers/App';
@@ -19,6 +20,11 @@ pe.start();
 
 const app = new Express();
 const port = 3333;
+
+const styleConfig = Presets['react-dom'];
+styleConfig.styleElementId = '_look';
+// turn off for prod
+styleConfig.plugins.push(Plugins.friendlyClassName);
 
 if (process.env.NODE_ENV === 'development') {
   const compiler = webpack(webpackConfig);
@@ -41,21 +47,28 @@ function renderResponse(req, res) {
   const initialState = { something: { something: 'server nonsense' } };
   const store = configureStore(initialState);
 
+  styleConfig.userAgent = req.headers['user-agent'];
+
+  // enable for production only -- otherwise, overrides hr styles
+  const appCSS = null;
+  // const appCSS = StyleSheet.renderToString(styleConfig.prefixer)
+
   const html = renderToString(
     <Provider store={store}>
-      <App />
+      <LookRoot config={styleConfig}>
+        <App />
+      </LookRoot>
     </Provider>
   );
-  res.send(renderHTML(html, initialState));
+  res.send(renderHTML(html, initialState, appCSS));
 
   // FIXME -- why do I need to explicitly send it off here?
   // Leading to the following error:
   // Error: Can't set headers after they are sent.
   res.sendFile('/build/app.js', { root: path.join(__dirname, '../..') });
-  res.sendFile('/build/main.css', { root: path.join(__dirname, '../..') });
 }
 
-function renderHTML(html, initialState) {
+function renderHTML(html, initialState, css) {
   return `
     <doctype! html>
     <html>
@@ -73,7 +86,7 @@ function renderHTML(html, initialState) {
         name="keywords"
         content="god, sex, power, the, love, wealth, happiness"
       >
-      <link rel="stylesheet" href="/main.css">
+      <style>${css}</style>
     </head>
 
     <body>
