@@ -1,21 +1,29 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { doSomething } from '../actions';
+import * as actions from '../actions';
+import Thing from '../components/Thing';
 
-@connect(state => ({ something: state.something.something }))
+@connect(
+  state => ({ something: state.something.something }),
+  dispatch => ({
+    doSomething: bindActionCreators(actions.doSomething, dispatch)
+  })
+)
 class App extends React.Component {
-  click() {
-    const { dispatch, something } = this.props;
-    dispatch(doSomething(something + 'a'))
+  click = () => {
+    const { doSomething, something } = this.props;
+    doSomething(something + 'a');
   }
 
   render() {
     const { something } = this.props;
 
     return (
-      <div className="thing" onClick={this.click.bind(this)}>
-        <span className="bleh">+++</span> { something }
-      </div>
+      <Thing
+        click={this.click}
+        content={something}
+      />
     );
   }
 }
